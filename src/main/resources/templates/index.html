@@ -56,7 +56,7 @@
 
 			<div class="col-lg-6">
 				<div id="logbox">   
-					<form id="signup" action="/signup" method="post" th:action="@{/signup}" th:object="${user}">
+					<form id="signup" action="/0" method="post" th:action="@{/0}" th:object="${user}">
 						<h1>Create an account</h1>
 						<input th:field="*{name}" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
 						<input type="password" placeholder="Choose a password" required="required" class="input pass"/>
