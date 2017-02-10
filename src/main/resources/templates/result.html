@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My Profile</title>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+</head>
+<body>
+	<h1>My Profile</h1>
+    <p th:text="'Name: ' + ${user.name}" />
+    <p th:text="'Email: ' + ${user.email}" />
+    <a href="/">Log out</a>
+</body>
+</html>
