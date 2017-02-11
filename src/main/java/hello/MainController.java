@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.*; 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.servlet.ModelAndView;
 
 import hello.User;
 import hello.UserRepository;
@@ -14,14 +16,38 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/signup")
-    public String signup(@ModelAttribute User user, BindingResult bindingResult, Model model) {
+    @PostMapping("/{user_id}")
+    public ModelAndView signup(@ModelAttribute User new_user, @PathVariable Integer user_id, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             //errors processing
         }
-        userRepository.save( new User(user.getName(), user.getEmail()) );
-        model.addAttribute("user", user);
-        return "result";
+
+        try{
+        	// Save new user
+	        User user = userRepository.save(new_user);
+	        if (user.getId() == 0) {
+                // user already exists
+                return new ModelAndView(new RedirectView("/", true));
+            }
+
+            model.addAttribute("user", user);
+            return new ModelAndView(new RedirectView("/" + user.getId(), true));
+        }catch(Exception e){
+        	// do nothing
+        }
+
+        return new ModelAndView(new RedirectView("/", true));
+    }
+
+    @GetMapping("/{user_id}")
+    public String myPage(@PathVariable Integer user_id, Model model) {
+        if (userRepository.exists(user_id)){
+    		User user = userRepository.findOne(user_id);
+    		model.addAttribute("user", user);
+    		return "result";
+        }
+
+        return "error";
     }
 
     @RequestMapping("/")

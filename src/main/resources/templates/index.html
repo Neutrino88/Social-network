@@ -10,6 +10,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+	<link href="css/main.css" rel="stylesheet"></link>
 	<link href="css/signup.css" rel="stylesheet"></link>
 
 	<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -48,7 +49,7 @@
 
 	<div class="container">
 
-		<div class="row">
+		<div class="row main">
 			<div class="col-lg-6 description">
 				<h1>OLEG SUPER PROGER'S SITE</h1>
 				<p class="lead">With Love<br></br> From Heart.</p>
@@ -56,7 +57,7 @@
 
 			<div class="col-lg-6">
 				<div id="logbox">   
-					<form id="signup" action="/signup" method="post" th:action="@{/signup}" th:object="${user}">
+					<form id="signup" action="/0" method="post" th:action="@{/0}" th:object="${user}">
 						<h1>Create an account</h1>
 						<input th:field="*{name}" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
 						<input type="password" placeholder="Choose a password" required="required" class="input pass"/>
