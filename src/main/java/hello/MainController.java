@@ -17,29 +17,32 @@ public class MainController {
     private UserRepository userRepository;
 
     @PostMapping("/{user_id}")
-    public ModelAndView signup(@ModelAttribute User user, @PathVariable Integer user_id, BindingResult bindingResult, Model model) {
+    public ModelAndView signup(@ModelAttribute User new_user, @PathVariable Integer user_id, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             //errors processing
         }
 
-        // Add new user
-        userRepository.save(user);
-        model.addAttribute("user", user);
+        try{
+        	// Save new user
+	        userRepository.save(new_user);
+	        model.addAttribute("user", new_user);
 
-        // Search last element
-        Iterable<User> iter = userRepository.findAll();
+	        // Search last element
+	        Iterable<User> iter = userRepository.findAll();
 
-		for(User cur_user : iter)
-			user = cur_user;
+	        User last_user = new User(new_user.getName(), new_user.getEmail());
+			for(User cur_user : iter)
+				last_user = cur_user;
 
-		// update URI
-        return new ModelAndView(new RedirectView("/"+user.getId(), true));
-    }
+			if ( last_user.getEmail().equals(new_user.getEmail()) &&
+				 last_user.getName().equals(new_user.getName()) )
+				// update URI
+	        	return new ModelAndView(new RedirectView("/"+last_user.getId(), true));
+        }catch(Exception e){
+        	// do nothing
+        }
 
-    @RequestMapping("/")
-    public String index(Model model) {
-        model.addAttribute("user", new User());
-        return "index";
+        return new ModelAndView(new RedirectView("/", true));
     }
 
     @GetMapping("/{user_id}")
@@ -51,5 +54,11 @@ public class MainController {
         }
 
         return "error";
+    }
+
+    @RequestMapping("/")
+    public String index(Model model) {
+        model.addAttribute("user", new User());
+        return "index";
     }
 }
