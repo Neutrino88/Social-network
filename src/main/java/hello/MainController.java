@@ -24,20 +24,14 @@ public class MainController {
 
         try{
         	// Save new user
-	        userRepository.save(new_user);
-	        model.addAttribute("user", new_user);
+	        int id = userRepository.save(new_user);
+	        if (id == 0) {
+                // user already exists
+                return "index";
+            }
 
-	        // Search last element
-	        Iterable<User> iter = userRepository.findAll();
-
-	        User last_user = new User(new_user.getName(), new_user.getEmail());
-			for(User cur_user : iter)
-				last_user = cur_user;
-
-			if ( last_user.getEmail().equals(new_user.getEmail()) &&
-				 last_user.getName().equals(new_user.getName()) )
-				// update URI
-	        	return new ModelAndView(new RedirectView("/"+last_user.getId(), true));
+            model.addAttribute("user", new_user);
+            return new ModelAndView(new RedirectView("/" + id, true));
         }catch(Exception e){
         	// do nothing
         }
