@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html"></meta>
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Starter Template for Bootstrap</title>
+	<title>Log in</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
@@ -18,10 +18,10 @@
 	<script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 </head>
 
 <body>
@@ -56,16 +56,14 @@
 			</div>
 
 			<div class="col-lg-6">
-				<div id="logbox">   
-					<form id="signup" action="/0" method="post" th:action="@{/0}" th:object="${user}">
-						<h1>Create an account</h1>
-						<input th:field="*{name}" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
-						<input type="password" placeholder="Choose a password" required="required" class="input pass"/>
-						<input type="password" placeholder="Confirm password" required="required" class="input pass"/>
-						<input th:field="*{email}" type="email" placeholder="Email address" class="input pass"/>
-						<input type="submit" value="Sign me up!" class="inputButton"/>
+				<div id="logbox">
+					<form id="signup" method="post" th:action="@{/0}" th:object="${user}">
+						<h1>Account login</h1>
+						<input th:field="*{email}" type="email" placeholder="enter your email" class="input pass"></input>
+						<input type="password" placeholder="enter your password" required="required" class="input pass"></input>
+						<input type="submit" value="Sign me in!" class="inputButton"></input>
 						<div class="text-center">
-							Already have an account? <a href="login" id="login_id">Login</a>
+							<a href="#" id="">create an account</a> - <a href="#" id="">forgot password</a>
 						</div>
 					</form>
 				</div>

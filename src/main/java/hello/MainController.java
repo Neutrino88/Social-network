@@ -44,10 +44,17 @@ public class MainController {
         if (userRepository.exists(user_id)){
     		User user = userRepository.findOne(user_id);
     		model.addAttribute("user", user);
-    		return "result";
+    		return "profile";
         }
 
         return "error";
+    }
+
+    
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
     }
 
     @RequestMapping("/")
