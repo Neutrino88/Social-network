@@ -1,7 +1,6 @@
 /* logo and description */
 .description {
     text-align: center;
-    padding-top: 80px;
 }
 
 /* sign up style */
@@ -15,7 +14,9 @@
 
 #logbox {
     padding: 10px;
-    margin: 80px auto;
+    margin-left: : 80px auto;
+    margin-right: 80px auto;
+    margin-bottom: 80px auto;
     width: 340px;
     background-color: #fff;
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);

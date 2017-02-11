@@ -24,14 +24,14 @@ public class MainController {
 
         try{
         	// Save new user
-	        int id = userRepository.save(new_user);
-	        if (id == 0) {
+	        User user = userRepository.save(new_user);
+	        if (user.getId() == 0) {
                 // user already exists
-                return "index";
+                return new ModelAndView(new RedirectView("/", true));
             }
 
-            model.addAttribute("user", new_user);
-            return new ModelAndView(new RedirectView("/" + id, true));
+            model.addAttribute("user", user);
+            return new ModelAndView(new RedirectView("/" + user.getId(), true));
         }catch(Exception e){
         	// do nothing
         }
