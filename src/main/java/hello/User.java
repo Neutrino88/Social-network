@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table( uniqueConstraints = { @UniqueConstraint( columnNames = { "name", "email" } ) } )
+@Table( uniqueConstraints = { @UniqueConstraint( columnNames = { "email" } ) } )
 public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,7 +18,13 @@ public class User {
 
     private String email;
 
+    private String password;
 
+    public User (String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
     public User (String name, String email) {
         this.name = name;
         this.email = email;
@@ -43,10 +49,19 @@ public class User {
         this.name = name;
     }
 
+
     public String getEmail() {
         return email;
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

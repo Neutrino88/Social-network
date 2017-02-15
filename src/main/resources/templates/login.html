@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 	<meta charset="utf-8"></meta>
 	<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
@@ -57,13 +57,13 @@
 
 			<div class="col-lg-6">
 				<div id="logbox">
-					<form id="signup" method="post" th:action="@{/0}" th:object="${user}">
+					<form id="signup" method="post" th:action="@{/log_in}" th:object="${user}">
 						<h1>Account login</h1>
-						<input th:field="*{email}" type="email" placeholder="enter your email" class="input pass"></input>
-						<input type="password" placeholder="enter your password" required="required" class="input pass"></input>
+						<input th:field="*{email}" type="email" placeholder="Enter your email" class="input pass"></input>
+						<input th:field="*{password}" type="password" placeholder="Enter your password" required="required" class="input pass"></input>
 						<input type="submit" value="Sign me in!" class="inputButton"></input>
 						<div class="text-center">
-							<a href="#" id="">create an account</a> - <a href="#" id="">forgot password</a>
+							<a href="/" id="">create an account</a> - <a href="#" id="">forgot password</a>
 						</div>
 					</form>
 				</div>

@@ -19,6 +19,10 @@ jar {
 
 repositories {
     mavenCentral()
+
+    maven {
+        url 'https://repo.spring.io/libs-snapshot'
+    }
 }
 
 sourceCompatibility = 1.8
@@ -31,4 +35,6 @@ dependencies {
     compile 'mysql:mysql-connector-java'
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     testCompile("junit:junit")
+
+    compile 'org.springframework.security:spring-security-web:4.2.2.BUILD-SNAPSHOT'
 }

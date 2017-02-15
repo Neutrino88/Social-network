@@ -57,12 +57,12 @@
 
 			<div class="col-lg-6">
 				<div id="logbox">   
-					<form id="signup" action="/0" method="post" th:action="@{/0}" th:object="${user}">
+					<form id="signup" action="/0" method="post" th:action="@{/0}">
 						<h1>Create an account</h1>
-						<input th:field="*{name}" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
-						<input type="password" placeholder="Choose a password" required="required" class="input pass"/>
-						<input type="password" placeholder="Confirm password" required="required" class="input pass"/>
-						<input th:field="*{email}" type="email" placeholder="Email address" class="input pass"/>
+						<input th:field="*{user.name}" type="text" placeholder="What's your name?" pattern="^[A-Za-z]{2,8}( [A-Za-z]{2,8}){1,2}?$" autofocus="autofocus" required="required" class="input pass"/>
+						<input th:field="*{user.password}" type="password" placeholder="Choose a password" required="required" class="input pass"/>
+						<input th:field="*{passwordConfirm}" type="password" placeholder="Confirm password" required="required" class="input pass"/>
+						<input th:field="*{user.email}" type="email" placeholder="Email address" class="input pass"/>
 						<input type="submit" value="Sign me up!" class="inputButton"/>
 						<div class="text-center">
 							Already have an account? <a href="login" id="login_id">Login</a>
