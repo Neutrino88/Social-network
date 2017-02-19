@@ -1,23 +1,25 @@
 package vitmo.controllers;
 
+import org.springframework.web.bind.annotation.*;
 import vitmo.entities.User;
+import vitmo.repositories.PostsRepository;
 import vitmo.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.text.DateFormat;
 
 @RestController
 @RequestMapping("/")
 public class UsersController {
     @Autowired
     UsersRepository users;
+    @Autowired
+    PostsRepository posts;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView home(ModelMap model) {
@@ -31,8 +33,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView addUser(String username, String password, String password_confirm)
-    {
+    public ModelAndView addUser(String username, String password, String password_confirm) {
         //no empty fields allowed
         if (username.isEmpty() || password.isEmpty() || password_confirm.isEmpty())
             return null;
@@ -49,15 +50,16 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable("id") Long id)
-    {
+    public void delete(@PathVariable("id") Long id) {
         users.delete(id);
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ModelAndView getUser(@PathVariable("id") Long id, ModelMap model)
-    {
-        model.addAttribute("user", users.findOne(id));
+    public ModelAndView getUser(@PathVariable("id") Long id, ModelMap model) {
+        User user = users.findOne(id);
+        java.util.Collections.reverse(user.getPosts());
+        model.addAttribute("user", user);
+        model.addAttribute("posts", user.getPosts());
         return new ModelAndView("profile");
     }
 }

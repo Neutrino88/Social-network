@@ -10,7 +10,15 @@
 
     <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"></link>
     <link th:href="@{/css/main.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/signup.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/form.css}" rel="stylesheet"></link>
+
+    <!--
+    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="../static/css/main.css" rel="stylesheet"></link>
+    <link href="../static/css/form.css" rel="stylesheet"></link>
+    <link href="../static/css/profile.css" rel="stylesheet"></link>
+    <link href="../static/css/post.css" rel="stylesheet"></link>
+    -->
 
 </head>
 <body>
@@ -24,20 +32,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">V ITMO</a>
+            <a class="navbar-brand" href="/">V ITMO</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <div sec:authorize="isAuthenticated()">
-                    <li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" method="post">
-                            <input class="btn btn-info" type="submit" value="Sign Out"/>
+                            <input class="btn-link" type="submit" value="Sign Out"/>
                         </form>
-                    </li>
-                </div>
+                    </a>
+                </li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -47,14 +57,14 @@
 
     <div class="row main">
         <div class="col-lg-6 description">
-            <h1>OLEG SUPER PROGER'S SITE</h1>
+            <h1>OLEG AND YANA SUPER PROGER'S SITE</h1>
             <p class="lead">With Love<br></br> From Heart.</p>
         </div>
 
         <div class="col-lg-6">
             <div id="logbox">
                 <form id="signup" th:action="@{/signup}" method="post">
-                    <h1>Create an account</h1>
+                    <h2 class="text-center">Create an account</h2>
                     <input name="username" type="text" placeholder="What's your username?" pattern="^(\w|[0-9]){4,20}$" autofocus="autofocus" required="required" class="input pass"/>
                     <input name="password" type="password" placeholder="Choose a password" pattern="^.{6,20}$" required="required" class="input pass"/>
                     <input name="password_confirm" type="password" placeholder="Confirm password" required="required" class="input pass"/>
@@ -69,6 +79,6 @@
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script th:href="@{/js/bootstrap.min.js}"></script>
+<script th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>

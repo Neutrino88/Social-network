@@ -5,12 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <meta http-equiv="Content-Type" content="text/html"></meta>
 
-    <title>Login</title>
+    <title>User profile</title>
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"></link>
     <link th:href="@{/css/main.css}" rel="stylesheet"></link>
     <link th:href="@{/css/form.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/profile.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/post.css}" rel="stylesheet"></link>
 
     <!--
     <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
@@ -19,8 +21,8 @@
     <link href="../static/css/profile.css" rel="stylesheet"></link>
     <link href="../static/css/post.css" rel="stylesheet"></link>
     -->
-
 </head>
+
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -51,37 +53,36 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-
 <div class="container">
     <div class="row main">
-        <div class="col-lg-6 description">
-            <h1>OLEG AND YANA SUPER PROGER'S SITE</h1>
-            <p class="lead">With Love<br></br> From Heart.</p>
+        <div class="col-sm-8">
+                <div id="logbox">
+                    <form th:action="@{/post/new}" method="post">
+                        <input name="post_name" type="text" placeholder="Add a post name" required="required" class="input pass"/>
+                        <textarea name="content" type="text" placeholder="Add a new post" required="required" class="pass blog-post-text-input"></textarea>
+                        <input class="inputButton" type="submit" value="Add post"/>
+                    </form>
+                </div>
         </div>
 
-        <div class="col-lg-6">
-            <div id="logbox">
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                        <span class="sr-only">Error:</span>
-                        Enter a valid username
-                </div>
-
-                <div th:if="${param.logout}" class="alert alert-success" role="alert">
-                    <span class="sr-only">Success:</span>
-                    You have been logged out.
-                </div>
-
-                <form th:action="@{/login}" method="post" id="signup">
-                    <h2 class="text-center">Login</h2>
-                    <div><input placeholder="Enter your username" pattern="^(\w|[0-9]){4,20}$" required="required" class="input pass" type="text" name="username"/> </div>
-                    <div><input placeholder="Enter your password" pattern="^.{6,20}$" required="required" class="input pass" type="password" name="password"/></div>
-                    <div><input type="submit" value="Sign In" class="inputButton"/></div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module">
+                <form action="/post/new" method="get">
+                    <button type="submit" class="btn btn-info">New post!</button>
                 </form>
             </div>
-        </div>
+            <div class="sidebar-module">
+                <h4>Elsewhere</h4>
+                <ol class="list-unstyled">
+                    <li><a href="#">GitHub</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ol>
+            </div>
+        </div><!-- /.blog-sidebar -->
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script th:href="@{/js/bootstrap.js}"></script>
 </body>
