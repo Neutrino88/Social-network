@@ -1,6 +1,5 @@
 package vitmo.controllers;
 
-import javassist.bytecode.ExceptionsAttribute;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import vitmo.entities.Post;
@@ -10,7 +9,6 @@ import vitmo.repositories.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 

@@ -1,6 +1,7 @@
 package vitmo.entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,13 +23,13 @@ public class User {
     @JoinTable(name = "users_posts",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = @JoinColumn(name = "post_id"))
-    private Set<Post> posts;
+    private List<Post> posts;
 
-    public Set<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Set<Post> roles) {
+    public void setPosts(List<Post> roles) {
         this.posts = posts;
     }
 

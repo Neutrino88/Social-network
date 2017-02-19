@@ -1,6 +1,7 @@
 package vitmo.entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="posts")
@@ -22,6 +23,18 @@ public class Post{
         this.name = name;
         this.content = content;
         this.user = user;
+    }
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "time")
+    private java.util.Date time;
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     @Id

@@ -1,8 +1,6 @@
 package vitmo.controllers;
 
-import javassist.bytecode.ExceptionsAttribute;
 import org.springframework.web.bind.annotation.*;
-import vitmo.entities.Post;
 import vitmo.entities.User;
 import vitmo.repositories.PostsRepository;
 import vitmo.repositories.UsersRepository;
@@ -56,8 +54,10 @@ public class UsersController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     public ModelAndView getUser(@PathVariable("id") Long id, ModelMap model) {
-        model.addAttribute("user", users.findOne(id));
-        model.addAttribute("posts", users.findOne(id).getPosts());
+        User user = users.findOne(id);
+        java.util.Collections.reverse(user.getPosts());
+        model.addAttribute("user", user);
+        model.addAttribute("posts", user.getPosts());
         return new ModelAndView("profile");
     }
 }
