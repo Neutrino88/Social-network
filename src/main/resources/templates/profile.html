@@ -30,14 +30,6 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-
-                <div sec:authorize="isAuthenticated()">
-                    <li>
-                        <form th:action="@{/logout}" method="post">
-                            <input class="btn btn-info" type="submit" value="Sign Out"/>
-                        </form>
-                    </li>
-                </div>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -46,8 +38,26 @@
     <div class="row main">
         <h1>My Profile</h1>
         <p th:text="'User name: ' + ${user.username}"></p>
+
+        <div sec:authorize="isAuthenticated()">
+        </div>
     </div>
 </div>
+
+<div class="col-lg-3">
+    <div id="logbox">
+        <form th:action="@{/addpost}" method="post">
+            <input name="post_name" type="text" placeholder="Add a post name"  required="required" class="input pass"/>
+            <input name="content" type="text" placeholder="Add a new post"  required="required" class="input pass"/>
+            <input class="inputButton" type="submit" value="Add post"/>
+        </form>
+
+        <form th:action="@{/logout}" method="post">
+            <input class="btn btn-info" type="submit" value="Sign Out"/>
+        </form>
+    </div>
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script th:href="@{/js/bootstrap.min.js}"></script>
 </body>

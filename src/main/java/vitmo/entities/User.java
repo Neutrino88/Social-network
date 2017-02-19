@@ -18,6 +18,20 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    @OneToMany
+    @JoinTable(name = "users_posts",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = @JoinColumn(name = "post_id"))
+    private Set<Post> posts;
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> roles) {
+        this.posts = posts;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
