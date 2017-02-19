@@ -60,23 +60,4 @@ public class UsersController {
         model.addAttribute("posts", users.findOne(id).getPosts());
         return new ModelAndView("profile");
     }
-
-    @RequestMapping(value = "/addpost", method = RequestMethod.POST)
-    public ModelAndView addPost(String post_name, String content) {
-        //no empty fields allowed
-        if (post_name.isEmpty() || content.isEmpty())
-            return null;
-        try {
-            UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = users.findByUsername(principal.getUsername());
-
-            Post post = new Post(post_name, content, user);
-            posts.save(post);
-            return new ModelAndView(new RedirectView("/user/" + user.getId(), true));
-        } catch (Exception e) {
-            System.out.println("Error!\n");
-        }
-        return new ModelAndView("/");
-    }
-
 }
