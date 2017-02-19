@@ -1,5 +1,7 @@
 package vitmo.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -25,7 +27,7 @@ public class Post{
         this.user = user;
     }
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "time")
     private java.util.Date time;
 
