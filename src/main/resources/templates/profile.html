@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html"/>
 
     <title>User profile</title>
 
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/main.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/form.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/profile.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/form.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profile.css}" rel="stylesheet"/>
 
     <!--
-    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
-    <link href="../static/css/main.css" rel="stylesheet"></link>
-    <link href="../static/css/form.css" rel="stylesheet"></link>
-    <link href="../static/css/profile.css" rel="stylesheet"></link>
+    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/main.css" rel="stylesheet"/>
+    <link href="../static/css/form.css" rel="stylesheet"/>
+    <link href="../static/css/profile.css" rel="stylesheet"/>
     -->
 </head>
 
@@ -67,9 +67,20 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module">
-                <form th:action="@{/post/new}" method="get">
-                    <button type="submit" class="btn btn-info">New post!</button>
-                </form>
+                <a sec:authorize="isAuthenticated()">
+                    <form th:action="@{/post/new}" method="get">
+                        <button type="submit" class="btn btn-info">New post</button>
+                    </form>
+
+                    <form th:action="@{/settings}" method="get">
+                        <button type="submit" class="btn btn-info">Settings</button>
+                    </form>
+                </a>
+                <a sec:authorize="isAnonymous()">
+                    <form th:action="@{/login}" method="post">
+                        <button type="submit" class="btn btn-info">Log in</button>
+                    </form>
+                </a>
             </div>
             <div class="sidebar-module">
                 <h4>Elsewhere</h4>

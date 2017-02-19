@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>V ITMO</title>
+
+    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/form.css}" rel="stylesheet"/>
+<!--
+    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/main.css" rel="stylesheet"/>
+    <link href="../static/css/signup.css" rel="stylesheet"/>
+    <link href="../static/css/settings.css" rel="stylesheet"/>
+-->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">V ITMO</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a sec:authorize="isAuthenticated()">
+                        <form th:action="@{/logout}" method="post">
+                            <input class="btn-link" type="submit" value="Sign Out"/>
+                        </form>
+                    </a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row main" sec:authorize="isAuthenticated()">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <h1 align="center">My profile setting</h1>
+            <form th:action="@{/settings}" method="post" id="signup">
+                <h4>User name:</h4>
+                <input name="username"          type="text"     pattern="(^(\w|[0-9]){4,20}$|^$)"   th:placeholder="${user.username}"   class="input pass"/>
+                <h4>Password:</h4>
+                <input name="new_password"      type="password" pattern="(^.{6,20}$|^$)"            placeholder="New password"          class="input pass"/>
+                <input name="confirm_password"  type="password" pattern="(^.{6,20}$|^$)"            placeholder="Confirm password"      class="input pass"/>
+                <h4>Confirm the actions of the current password</h4>
+                <input name="cur_password"      type="password" pattern="^.{6,20}$"                 placeholder="Current password"      class="input pass" required="required" />
+                <input class="inputButton"      type="submit"   value="Change the data"/>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script th:href="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

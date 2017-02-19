@@ -62,4 +62,53 @@ public class UsersController {
         model.addAttribute("posts", user.getPosts());
         return new ModelAndView("profile");
     }
+
+    @RequestMapping(value = "/settings", method = RequestMethod.GET)
+    public ModelAndView changeData(ModelMap model) {
+        // Get current user
+        UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.findByUsername(principal.getUsername());
+
+        model.addAttribute("user", user);
+        return new ModelAndView("/settings");
+    }
+
+    @RequestMapping(value = "/settings", method = RequestMethod.POST)
+    public ModelAndView changeData(String cur_password, String username, String new_password, String confirm_password, ModelMap model) {
+        // Get current user
+        UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = users.findByUsername(principal.getUsername());
+
+        // if current password is wrong
+        if (!equalsPassword(cur_password, user)) {
+            return new ModelAndView("/settings");
+        }
+
+        // change username
+        if (username.length() >= 4) {
+            try{
+                User user_from_db = users.findOne(user.getId());
+                user_from_db.setUsername(username);
+                user = users.save(user_from_db);
+            }catch(Exception e){
+                return new ModelAndView("/settings");
+            }
+        }
+        // change password
+        if ( new_password.length() >= 6  && new_password.equals(confirm_password) ) {
+            try{
+                User user_from_db = users.findOne(user.getId());
+                user_from_db.setPassword(new_password);
+                user = users.save(user_from_db);
+            }catch(Exception e){
+            }
+        }
+
+        model.addAttribute("user", user);
+        return new ModelAndView(new RedirectView("/user/" + user.getId(), true));
+    }
+
+    private boolean equalsPassword(String password, User user){
+        return password.equals(user.getPassword());
+    }
 }
