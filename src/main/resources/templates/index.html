@@ -65,9 +65,9 @@
             <div id="logbox">
                 <form id="signup" th:action="@{/signup}" method="post">
                     <h2 class="text-center">Create an account</h2>
-                    <input name="username" type="text" placeholder="What's your username?" pattern="^(\w|[0-9]){4,20}$" autofocus="autofocus" required="required" class="input pass"/>
-                    <input name="password" type="password" placeholder="Choose a password" pattern="^.{6,20}$" required="required" class="input pass"/>
-                    <input name="password_confirm" type="password" placeholder="Confirm password" required="required" class="input pass"/>
+                    <input name="username"          type="text"     placeholder="What's your username?" pattern="^(\w|[0-9]){4,20}$"    required="required" class="input pass" autofocus="autofocus"/>
+                    <input name="password"          type="password" placeholder="Choose a password"     pattern="^.{6,20}$"             required="required" class="input pass"/>
+                    <input name="password_confirm"  type="password" placeholder="Confirm password"      pattern="^.{6,20}$"             required="required" class="input pass"/>
                     <input type="submit" value="Sign me up!" class="inputButton"/>
                     <div class="text-center">
                         Already have an account? <a href="login" id="login_id">Log in</a>

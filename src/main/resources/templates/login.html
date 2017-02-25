@@ -39,15 +39,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a sec:authorize="isAuthenticated()">
-                        <form th:action="@{/logout}" method="post">
-                            <input class="btn-link" type="submit" value="Sign Out"/>
-                        </form>
-                    </a>
-                </li>
-            </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
