@@ -1,9 +1,5 @@
 package vitmo;
 
-/**
- * Created by admin on 04.07.15.
- */
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;

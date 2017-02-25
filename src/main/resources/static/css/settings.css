@@ -1,0 +1,13 @@
+#logbox {
+    align: center;
+    padding: 10px;
+    margin-left:  200px auto;
+    margin-right: 200px auto;
+    margin-bottom: 80px auto;
+    width: 80%;
+    height: 300px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+}

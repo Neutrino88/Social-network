@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8"></meta>
-    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-    <meta http-equiv="Content-Type" content="text/html"></meta>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html"/>
 
     <title>Login</title>
 
     <!-- Bootstrap core CSS -->
-    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/main.css}" rel="stylesheet"></link>
-    <link th:href="@{/css/form.css}" rel="stylesheet"></link>
+    <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/main.css}" rel="stylesheet"/>
+    <link th:href="@{/css/form.css}" rel="stylesheet"/>
 
     <!--
     <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
@@ -39,15 +39,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a sec:authorize="isAuthenticated()">
-                        <form th:action="@{/logout}" method="post">
-                            <input class="btn-link" type="submit" value="Sign Out"/>
-                        </form>
-                    </a>
-                </li>
-            </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
@@ -57,7 +48,7 @@
     <div class="row main">
         <div class="col-lg-6 description">
             <h1>OLEG AND YANA SUPER PROGER'S SITE</h1>
-            <p class="lead">With Love<br></br> From Heart.</p>
+            <p class="lead">With Love<br/> From Heart.</p>
         </div>
 
         <div class="col-lg-6">
@@ -74,8 +65,8 @@
 
                 <form th:action="@{/login}" method="post" id="signup">
                     <h2 class="text-center">Login</h2>
-                    <div><input placeholder="Enter your username" pattern="^(\w|[0-9]){4,20}$" required="required" class="input pass" type="text" name="username"/> </div>
-                    <div><input placeholder="Enter your password" pattern="^.{6,20}$" required="required" class="input pass" type="password" name="password"/></div>
+                    <div><input name="username" type="text"     placeholder="Enter your username" pattern="^(\w|[0-9]){4,20}$" required="required" class="input pass"/> </div>
+                    <div><input name="password" type="password" placeholder="Enter your password" pattern="^.{6,20}$"          required="required" class="input pass"/></div>
                     <div><input type="submit" value="Sign In" class="inputButton"/></div>
                 </form>
             </div>
