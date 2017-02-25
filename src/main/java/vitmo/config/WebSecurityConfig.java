@@ -19,13 +19,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .exceptionHandling().accessDeniedPage("/")
+                .and()
                 .authorizeRequests()
                 .antMatchers("/", "/signup", "/css/**", "/user/**").permitAll()
+                .antMatchers("/login").hasRole("ANONYMOUS")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
                 .and()
                 .logout()
                 .permitAll();
