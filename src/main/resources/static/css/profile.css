@@ -70,3 +70,8 @@
 .btn-info {
     background-color: #3CC;
 }
+
+.btn-sidebar {
+    width: 35%;
+    margin-bottom: 10px;
+}

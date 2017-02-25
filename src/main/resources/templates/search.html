@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta http-equiv="Content-Type" content="text/html"/>
 
-    <title>Login</title>
+    <title>User profile</title>
 
     <!-- Bootstrap core CSS -->
     <link th:href="@{/css/bootstrap/bootstrap.min.css}" rel="stylesheet"/>
     <link th:href="@{/css/main.css}" rel="stylesheet"/>
     <link th:href="@{/css/form.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profile.css}" rel="stylesheet"/>
 
     <!--
-    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"></link>
-    <link href="../static/css/main.css" rel="stylesheet"></link>
-    <link href="../static/css/form.css" rel="stylesheet"></link>
-    <link href="../static/css/profile.css" rel="stylesheet"></link>
-    <link href="../static/css/post.css" rel="stylesheet"></link>
+    <link href="../static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/main.css" rel="stylesheet"/>
+    <link href="../static/css/form.css" rel="stylesheet"/>
+    <link href="../static/css/profile.css" rel="stylesheet"/>
     -->
-
 </head>
+
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -57,38 +57,40 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-
 <div class="container">
     <div class="row main">
-        <div class="col-lg-6 description">
-            <h1>OLEG AND YANA SUPER PROGER'S SITE</h1>
-            <p class="lead">With Love<br/> From Heart.</p>
-        </div>
-
-        <div class="col-lg-6">
-            <div id="logbox">
-                <div th:if="${param.error}" class="alert alert-danger" role="alert">
-                        <span class="sr-only">Error:</span>
-                        Enter a valid username
-                </div>
-
-                <div th:if="${param.logout}" class="alert alert-success" role="alert">
-                    <span class="sr-only">Success:</span>
-                    You have been logged out.
-                </div>
-
-                <form th:action="@{/login}" method="post" id="signup">
-                    <h2 class="text-center">Login</h2>
-                    <div><input name="username" type="text"     placeholder="Enter your username" pattern="^(\w|[0-9]){4,20}$" required="required" class="input pass"/> </div>
-                    <div><input name="password" type="password" placeholder="Enter your password" pattern="^.{6,20}$"          required="required" class="input pass"/></div>
-                    <div><input type="submit" value="Sign In" class="inputButton"/></div>
-                </form>
-            </div>
-        </div>
+        <div class="col-lg-offset-3 col-lg-6">
+            <div class="input-group">
+                <input type="text" id="input" class="form-control" placeholder="Search for..." onkeyup="doAjax()"></input>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" onclick="doAjax()" type="button">Go!</button>
+                </span>
+            </div><!-- /input-group -->
+        </div><!-- /.col-lg-6 -->
+    </div>
+    <div class="row">
+        <div class="col-lg-offset-3 col-lg-6" id="users"></div>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript">
+    function doAjax() {
+        $.ajax({
+            url:'search',
+            data: ({username: $('#input').val()}),
+            success: function(data) {
+                $('#users').empty();
+                for (var user of data) {
+                    $('#users').append(
+                        '<div class="well"><a href="/user/' + user.id + '">' + user.username +'</a></div>')
+                }
+            },
+            dataType: 'json',
+            type: "POST"
+        })
+    }
+</script>
 <script th:href="@{/js/bootstrap.js}"></script>
 </body>
 </html>

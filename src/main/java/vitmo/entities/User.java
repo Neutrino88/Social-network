@@ -1,5 +1,7 @@
 package vitmo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +27,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "post_id"))
     private List<Post> posts;
 
+    @JsonIgnore
     public List<Post> getPosts() {
         return posts;
     }
@@ -33,6 +36,7 @@ public class User {
         this.posts = posts;
     }
 
+    @JsonIgnore
     public Set<Role> getRoles() {
         return roles;
     }
@@ -70,5 +74,4 @@ public class User {
         username = name;
         password = pass;
     }
-
 }

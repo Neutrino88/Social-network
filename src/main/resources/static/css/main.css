@@ -2,6 +2,10 @@
     padding-top: 80px;
 }
 
+.row {
+    margin-top: 20px;
+}
+
 h1, .h1,
 h2, .h2,
 h3, .h3,
@@ -12,6 +16,10 @@ h6, .h6 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: normal;
     color: #333;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 /* Sidebar modules for boxing content */
@@ -28,4 +36,10 @@ h6, .h6 {
 .sidebar-module-inset ul:last-child,
 .sidebar-module-inset ol:last-child {
     margin-bottom: 0;
+}
+
+.logout-button {
+    margin: 0px;
+    padding: 0px;
+    border: none;
 }

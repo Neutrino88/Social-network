@@ -29,19 +29,25 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">V ITMO</a>
+            <a class="navbar-brand" href="/">V ITMO</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li class="active"><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="/search">Search</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" method="post">
-                            <input class="btn-link" type="submit" value="Sign Out"/>
+                            <input class="btn-link logout-button" type="submit" value="Sign Out"/>
+                        </form>
+                    </a>
+                    <a sec:authorize="isAnonymous()">
+                        <form th:action="@{/}" method="get">
+                            <input class="btn-link logout-button" type="submit" value="Sign up"/>
                         </form>
                     </a>
                 </li>

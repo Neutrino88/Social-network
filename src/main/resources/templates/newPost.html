@@ -40,12 +40,18 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="/search">Search</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a sec:authorize="isAuthenticated()">
                         <form th:action="@{/logout}" method="post">
-                            <input class="btn-link" type="submit" value="Sign Out"/>
+                            <input class="btn-link logout-button" type="submit" value="Sign Out"/>
+                        </form>
+                    </a>
+                    <a sec:authorize="isAnonymous()">
+                        <form th:action="@{/}" method="get">
+                            <input class="btn-link logout-button" type="submit" value="Sign up"/>
                         </form>
                     </a>
                 </li>
@@ -67,9 +73,6 @@
 
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
             <div class="sidebar-module">
-                <form action="/post/new" method="get">
-                    <button type="submit" class="btn btn-info">New post!</button>
-                </form>
             </div>
             <div class="sidebar-module">
                 <h4>Elsewhere</h4>
