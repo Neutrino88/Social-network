@@ -38,15 +38,37 @@ public class PostsController {
         UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.findByUsername(principal.getUsername());
 
-        //no empty fields allowed
-        if (!post_name.isEmpty() && !content.isEmpty()){
+        // Check post_name and content formats
+        if (postNameInNormalFormat(post_name) && contentInNormalFormat(content) ){
             try {
                 Post post = new Post(post_name, content, user);
                 posts.save(post);
-            } catch (Exception e) {
+            } catch (Exception e) { }
 
-            }
+            return new ModelAndView(new RedirectView("/user/" + user.getId(), true));
         }
-        return new ModelAndView(new RedirectView("/user/" + user.getId(), true));
+        return new ModelAndView(new RedirectView("/post/new/", true));
+    }
+
+    private boolean postNameInNormalFormat(String post_name){
+        // Check length of post_name
+        if (post_name.isEmpty())
+            return false;
+
+        // Check format post_name
+        for (char symbol : post_name.toCharArray()) {
+            int code = (int) symbol;
+
+            if (    48 <= code && code <= 57 ||     // if not in 0..9 and
+                    65 <= code && code <= 90 ||     // if not in A..Z and
+                    97 <= code && code <= 122)      // if not in a..z and
+                return true;
+        }
+
+        return false;
+    }
+
+    private boolean contentInNormalFormat(String content){
+        return true;
     }
 }
