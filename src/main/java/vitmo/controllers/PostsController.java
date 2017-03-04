@@ -50,22 +50,9 @@ public class PostsController {
         return new ModelAndView(new RedirectView("/post/new/", true));
     }
 
-    private boolean postNameInNormalFormat(String post_name){
-        // Check length of post_name
-        if (post_name.isEmpty())
-            return false;
-
+    private boolean postNameInNormalFormat(String postName){
         // Check format post_name
-        for (char symbol : post_name.toCharArray()) {
-            int code = (int) symbol;
-
-            if (    48 <= code && code <= 57 ||     // if not in 0..9 and
-                    65 <= code && code <= 90 ||     // if not in A..Z and
-                    97 <= code && code <= 122)      // if not in a..z and
-                return true;
-        }
-
-        return false;
+        return postName.matches("(.*)\\w(.*)");
     }
 
     private boolean contentInNormalFormat(String content){

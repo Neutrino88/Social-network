@@ -33,9 +33,10 @@ public class UsersController {
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView addUser(String username, String password, String password_confirm) {
         // Check format fields
-        if (    !passwordInNormalFormat(password)  ||
-                !password.equals(password_confirm) ||
-                !usernameInNormalFormat(username) )
+        if (!passwordInNormalFormat(password)  ||
+            !password.equals(password_confirm) ||
+            !usernameInNormalFormat(username) )
+
             return new ModelAndView("index");
         // Save new user
         try {
@@ -72,32 +73,31 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/settings", method = RequestMethod.POST)
-    public ModelAndView changeData(String cur_password, String username, String new_password, String confirm_password, ModelMap model) {
+    public ModelAndView changeData(String curPassword, String username, String newPassword, String confirmPassword, ModelMap model) {
         // Get current user
         UserDetails principal = (UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = users.findByUsername(principal.getUsername());
 
         // if current password is wrong
-        if (!equalsPassword(cur_password, user))
+        if (!equalsPassword(curPassword, user))
             return new ModelAndView("/settings");
 
         // change username
         if (usernameInNormalFormat(username)) {
             try{
-                User user_from_db = users.findOne(user.getId());
-                user_from_db.setUsername(username);
-                user = users.save(user_from_db);
+                User userFromDB = users.findOne(user.getId());
+                userFromDB.setUsername(username);
+                user = users.save(userFromDB);
             }catch(Exception e){
                 return new ModelAndView("/settings");
             }
         }
         // change password
-        if (    passwordInNormalFormat(new_password)  &&
-                equalsPassword(new_password, confirm_password) ){
+        if (passwordInNormalFormat(newPassword)  && equalsPassword(newPassword, confirmPassword) ){
             try{
-                User user_from_db = users.findOne(user.getId());
-                user_from_db.setPassword(new_password);
-                user = users.save(user_from_db);
+                User userFromDB = users.findOne(user.getId());
+                userFromDB.setPassword(newPassword);
+                user = users.save(userFromDB);
             }catch(Exception e){
             }
         }
@@ -116,27 +116,11 @@ public class UsersController {
     }
 
     private boolean usernameInNormalFormat(String username){
-        // Check length of username
-        if (username.length() < 4 || username.length() > 20)
-            return false;
-
-        // Check format every characters in username
-        for (char symbol : username.toCharArray()) {
-            int code = (int) symbol;
-
-            if (  !(48 <= code && code <= 57 ||     // if not in 0..9 and
-                    65 <= code && code <= 90 ||     // if not in A..Z and
-                    97 <= code && code <= 122 ||    // if not in a..z and
-                    (int) '_' == code))             // if is not '_'
-                return false;
-        }
-        return true;
+        // Check length and format of username
+        return username.matches("\\w{4,20}");
     }
     private boolean passwordInNormalFormat(String password){
         // Check length of username
-        if (password.length() < 6 || password.length() > 20)
-            return false;
-
-        return true;
+        return password.matches(".{6,20}");
     }
 }

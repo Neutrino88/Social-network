@@ -13,6 +13,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String username;
+    @JsonIgnore
     private String password;
 
     @ManyToMany
@@ -30,6 +31,12 @@ public class User {
     @JsonIgnore
     public List<Post> getPosts() {
         return posts;
+    }
+
+    protected User(){}
+    public User(String name, String pass) {
+        username = name;
+        password = pass;
     }
 
     public void setPosts(List<Post> roles) {
@@ -67,11 +74,5 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    protected User(){}
-    public User(String name, String pass) {
-        username = name;
-        password = pass;
     }
 }
